@@ -1,0 +1,48 @@
+/*
+    DOM is Loaded
+        Start Game
+            make the game board
+                Generate a random word
+                Set Lives or guesses left
+                Set the hangman word to the random word while hiding it
+            Print all this information to the document
+        User Inputs
+            Determine if the player can move/guess
+                Check if the input is a letter
+                Check if the input isnt already guessed
+                Check if the input is in the hangman word
+            Update the board
+                Update the hangman word
+                    updates if the letter is in the hangman word
+                Update the guesses
+                    updates the guesses
+                    removes a live/guess
+            Print to board
+        Check for Winner/Loser
+            Winner
+                If the number of empty spaces is 0 we have a winner
+                    Add 1 to wins
+                    Reset Board
+                    Start the game again
+            Loser
+                if lives/guess is 0 we have a loser
+                    Add 1 to loss
+                    Reset Board
+                    Start the game again
+*/ 
+
+
+//This function takes an arr for an argument (we use it for our id array)
+function print(arr) {
+    arr.forEach(function(idName) {
+        console.log(idName)
+            // If the idName variable is an array do this
+        if (Array.isArray(window[idName])) {
+            document.getElementById(idName).textContent = window[idName].join(' ')
+        }
+        // If the idName variable is any other type besides array do this
+        else {
+            document.getElementById(idName).textContent = window[idName];
+        }
+    });
+}
