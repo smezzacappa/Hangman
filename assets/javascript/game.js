@@ -1,26 +1,28 @@
-
 //I wouldn't recommend changing these names. These id names match the layout if you change these names here make sure you change it on your html page as well.
 var ids = ['hangmanWord','wrongGuesses','guessesLeft','winCounter','lossCounter'];
 
 //finish declaring the rest of the variables we need. 
 ///**** Hint use the names in the ids array to finish the last 3 variables we need
-var answerWord= wordBank[];
+var answerWord='';
 var winCounter = 0;
 var lossCounter= 0;
+var guessesLeft = 9;
+var wrongGuesses = 0;
+var hangmanWord = '';
 
 //add missing 3 variables named
 
 //Add how many names you want to this word bank. All names need to be lowercase.
-var wordBank = ["beyonce", "taylor swift", "lil wayne", "abba", "nicki minaj", "cardi b", "cher", "justin timberlake", "sam smith", "shawn mendez", "britney spears", "justin beiber"]
+var wordBank= ["ryan", "crystal", "sandra", "sam", "chris"]
 
 //Valid characters we want to accept
 var validLetters = ["a", 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-//Randomize and return --- this is literally just a randomize function
+//Randomize and return
 function randomize(arr){
     // [0,1,2,3,4].length = 5
-    var answerWord = arr[Math.floor(Math.random() * wordBank.length)];
-    return arr[answerWord];
+    var randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
 }
 
 
@@ -36,7 +38,7 @@ function updateLetters(letter){
         }
     }
 }
-//Explain what the updateLetters function is doing.
+//Explain what the updateLetters function is doing./
 //if the letter guessed is in the answerWord array then it is equal to answerWordletter, 
 //and the hangmanWord array is equal to answerWordletter
 //so hangmanWord array = answerWord array
@@ -45,15 +47,13 @@ function updateLetters(letter){
 
 
 function updateGuesses(letter){
-    if(letter !== answerWord){
-        push(wrongGuesses[letter])
-        updateGuesses--;
+    for(var i=0; i<answerWord.length; i--){
+        if(letter !== answerWord[i]){
+            var wrongLetter = answerWord[i];
+            hangmanWord[i] = wrongLetter;
+            hangmanWord[i] = answerWord[i]
+        }
     }
-    //Write the code needed to 
-    //add this letter to the wrong guesses array 
-
-    //subtract 1 from the guesses left number
-
 }
 
 function hideWord(arr) {
@@ -81,45 +81,47 @@ function validateInput(inputKey) {
 }
 
 function takeTurn(letter){
+    if(letter == answerWord[i]){
+        updateLetters();
+    } else(updateGuesses());
 
     //Add an if/else statement here.
     //if the letter is in the answerWord i should see a call to the updateLetters function
-    if(letter == answerWord){
-        updateLetters(letter);
-    }
-        
 
     //otherwise i should see a call to the the updateGuesses function
-else(letter !== answerWord){
-    updateGuesses(letter);
-}
+
     // keep this line here
     print(ids);
 }
 
 function updateScore(){
-    if()
+    
     //Add an if/else statement here.
     //if the user wins i should see a call to updateWin
-
+    if(answerWord = true){
+        updateLetters();
+    } 
     //or if the user loses i should see a call to the updateLoss
-
+    else if(answerWord = false){
+        updateGuesses();
+    }
 }
 
 function updateWin() {
+    
     //add what happens if the user wins code here
-
+   if()
     //Make a call to the startGame function here. 
     //This call is here to start the game once a player wins.
-
+    startGame();
 }
 
 function updateLoss() {
     //add what happens if the user loses code here
-
+    if()
     //Make a call to the startGame function here.
     //This call is here to start the game once a player losses.
-
+    startGame();
 }
 //This function takes an arr for an argument (we use it for our id array)
 function print(arr) {
@@ -145,14 +147,27 @@ function print(arr) {
 
 
 function startGame() {
-    /* 
+ /* 
     Add your board setup functions and or code here
-    The wrongGuesses variable needs to be an array
-    The hangmanWord variable needs to be an array
-    The guessesLeft variable needs to be an Integer
-    The winCounter variable needs to be an Integer
-    The lossCounter variable needs to be an Integer
-    */
+    The wrongGuesses variable needs to be an array*/
+    
+    wrongGuesses = updateLetters[];
+
+ //The hangmanWord variable needs to be an array
+    hangmanWord [];
+// The guessesLeft variable needs to be an Integer
+    guessesLeft = 0;
+// The winCounter variable needs to be an Integer
+    winCounter = 0;
+// The lossCounter variable needs to be an Integer
+    lossCounter = 0
+
+   
+   
+   
+   
+   
+   
     print(ids)
 }
 
@@ -161,6 +176,8 @@ function startGame() {
 //This drives all the game mechanics.
 document.addEventListener('keyup', function(event){
     if(validateInput(event.key)){
+        takeTurn();
+        updateScore();
         //make a call to the takeTurn Function
         
         //make a call to the updateScore function
