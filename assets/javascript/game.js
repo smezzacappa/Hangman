@@ -3,12 +3,12 @@ var ids = ['hangmanWord','wrongGuesses','guessesLeft','winCounter','lossCounter'
 
 //finish declaring the rest of the variables we need. 
 ///**** Hint use the names in the ids array to finish the last 3 variables we need
-var answerWord='';
+var answerWord="";
 var winCounter = 0;
 var lossCounter= 0;
 var guessesLeft = 9;
 var wrongGuesses = 0;
-var hangmanWord = '';
+var hangmanWord="";
 
 //add missing 3 variables named
 
@@ -31,10 +31,7 @@ function updateLetters(letter){
         //the for loop runs through all of the words letters
         // now if a letter matches, the if (below) comes in to play
         if(letter === answerWord[i]) {
-            var answerWordletter = answerWord[i]
-            hangmanWord[i] = answerWordletter;
-
-            hangmanWord[i] =answerWord[i];
+            hangmanWord[i] = answerWord[i];
         }
     }
 }
@@ -47,13 +44,8 @@ function updateLetters(letter){
 
 
 function updateGuesses(letter){
-    for(var i=0; i<answerWord.length; i--){
-        if(letter !== answerWord[i]){
-            var wrongLetter = answerWord[i];
-            hangmanWord[i] = wrongLetter;
-            hangmanWord[i] = answerWord[i]
-        }
-    }
+    wrongGuesses.push(letter);
+    guessesLeft--;
 }
 
 function hideWord(arr) {
@@ -81,9 +73,11 @@ function validateInput(inputKey) {
 }
 
 function takeTurn(letter){
-    if(letter == answerWord[i]){
-        updateLetters();
-    } else(updateGuesses());
+    if(answerWord.indexOf(letter)>=0){
+        updateLetters(letter)
+    } else{
+        updateGuesses(letter)
+    };
 
     //Add an if/else statement here.
     //if the letter is in the answerWord i should see a call to the updateLetters function
@@ -98,19 +92,19 @@ function updateScore(){
     
     //Add an if/else statement here.
     //if the user wins i should see a call to updateWin
-    if(answerWord = true){
-        updateLetters();
+    if(hangmanWord.indexOf('_') === -1){
+        updateWin()
     } 
     //or if the user loses i should see a call to the updateLoss
-    else if(answerWord = false){
-        updateGuesses();
+    else if(guessesLeft === 0){
+        updateLoss();
     }
 }
 
 function updateWin() {
-    
+    winCounter++;
+    alert("YOU WON! CONGRATS!")
     //add what happens if the user wins code here
-   if()
     //Make a call to the startGame function here. 
     //This call is here to start the game once a player wins.
     startGame();
@@ -118,7 +112,8 @@ function updateWin() {
 
 function updateLoss() {
     //add what happens if the user loses code here
-    if()
+    lossCounter++;
+    alert("YOU LOST!!")
     //Make a call to the startGame function here.
     //This call is here to start the game once a player losses.
     startGame();
@@ -128,40 +123,30 @@ function print(arr) {
     arr.forEach(function (idName) {
 
         // If the idName variable is an array do this
-        if(Array.isArray(idName)) {
-            document.getElementById(idName).textContent = idName.join(' ')
+        if(Array.isArray(window[idName])) {
+            document.getElementById(idName).textContent = window[idName].join(' ')
         }
 
         // If the idName variable is any other type besides array do this
         else {
-            document.getElementById(idName).textContent = idName;
+            document.getElementById(idName).textContent = window[idName];
         }
     });
 }
 //explain what the print function is doing.
 
-
-
-
-
-
-
 function startGame() {
  /* 
     Add your board setup functions and or code here
-    The wrongGuesses variable needs to be an array*/
-    
-    wrongGuesses = updateLetters[];
+    The wrongGuesses variable needs to be an array*/ 
 
  //The hangmanWord variable needs to be an array
-    hangmanWord [];
+   answerWord = randomize(wordBank);
+   hangmanWord = hideWord(answerWord);
 // The guessesLeft variable needs to be an Integer
-    guessesLeft = 0;
-// The winCounter variable needs to be an Integer
-    winCounter = 0;
-// The lossCounter variable needs to be an Integer
-    lossCounter = 0
-
+    guessesLeft = 9;
+    wrongGuesses = []
+   
    
    
    
@@ -176,7 +161,7 @@ function startGame() {
 //This drives all the game mechanics.
 document.addEventListener('keyup', function(event){
     if(validateInput(event.key)){
-        takeTurn();
+        takeTurn(event.key);
         updateScore();
         //make a call to the takeTurn Function
         
